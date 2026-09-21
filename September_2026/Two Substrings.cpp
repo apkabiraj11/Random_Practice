@@ -20,8 +20,6 @@ const int N = 1e6 + 9, mod = 1e9 + 7;
 void solve() {
     string s;
     cin >> s;
-
-
     for(int i = 0; i < s.size() - 1; i++){
     	if(s[i] == 'A' && s[i + 1] == 'B'){
     		
@@ -36,7 +34,20 @@ void solve() {
     		break;
     	}
     }
-    
+    for(int i = 0; i < s.size() - 1; i++){
+    	if(s[i] == 'B' && s[i + 1] == 'A'){
+    		
+    		for(int j = 0; j < s.size() - 1; j++){
+				if(j < i - 1 || j > i + 1){
+					if(s[j] == 'A' && s[j + 1] == 'B'){
+						yes;
+						return;
+					}
+				}  			
+    		}
+    		break;
+    	}
+    }
     no;
 
 }
