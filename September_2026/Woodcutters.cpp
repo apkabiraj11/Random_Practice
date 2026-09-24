@@ -21,35 +21,49 @@ void solve() {
     int n;
     cin >> n;
     vector<pair<int,int>> ar(n);
-    for(int i = 0;i<n; i++){
-    	int x, h;
-    	cin >> x >> h;
-    	ar[i] = {x, h};
+
+    for(int i = 0; i < n; i++){
+        int x, h;
+        cin >> x >> h;
+        ar[i] = {x, h};
     }
 
-    sort(ar.begin(),ar.end());
+    sort(ar.begin(), ar.end());
+
+    if(n == 1){
+        cout << 1 << ln;
+        return;
+    }
+
     int ans = 1;
     int l = ar[0].first;
-    for(int i = 1; i < n; i++){
-    	auto [xi, hi] = ar[i];
 
-    	if(xi - hi > l){
-    		ans++;
-    		l = xi;
-    	}
-    	else{
-    		if(i < n - 1){
-    			auto [xj, hj] = ar[i + 1];
-    			if(xi + hi < xj && l < xi){
-    				ans++;
-    				l = xi + hi;
-    			}
-    		}
-    		else if(i == n - 1){
-    			ans++;
-    		}
-    	}
+    for(int i = 1; i < n; i++){
+        auto [xi, hi] = ar[i];
+
+        if(xi - hi > l){
+            ans++;
+            l = xi;
+        }
+        else{
+            if(i < n - 1){
+                auto [xj, hj] = ar[i + 1];
+
+                if(xi + hi < xj){
+                    ans++;
+                    l = xi + hi;
+                }
+                else{
+                    l = xi;
+                }
+            }
+            else{
+                ans++;
+                l = xi + hi;
+            }
+        }
     }
+
     cout << ans << ln;
 }
 
